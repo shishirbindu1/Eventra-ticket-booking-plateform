@@ -1,0 +1,26 @@
+{
+  "name": "eventra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shishirbindu1/Eventra-ticket-booking-plateform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/shishirbindu1/Eventra-ticket-booking-plateform/issues"
+  },
+  "homepage": "https://github.com/shishirbindu1/Eventra-ticket-booking-plateform#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "express": "^5.2.1",
+    "tailwindcss": "^4.3.3"
+  }
+}
