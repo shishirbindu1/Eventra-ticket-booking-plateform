@@ -2,6 +2,7 @@ import events from "./concertData.js";
 
 //DOM selector
 const eventInfo = document.querySelector(".eventInfo");
+const seatDetail = document.querySelector(".seatDetail");
 
 //get id from url
 const params = new URLSearchParams(window.location.search);
@@ -27,10 +28,27 @@ eventInfo.innerHTML = `
     </div>
 `;
 
-//creating seat 
+//creating seat
 
-const rows = ['A','B','C','D','E','F','G']
+const rows = ["A", "B", "C", "D", "E", "F", "G"];
 
-rows.forEach(row=>{
-    
+rows.forEach((row) => {
+  for (let col = 1; col <= 6; col++) {
+    const seat = `${row}${col}`;
+    seatDetail.innerHTML += `
+        <button
+        class="seatBtn bg-gray-300 p-3 rounded-full cursor-pointer hover:bg-gray-400" data-seat="${seat}"
+      >
+        ${seat}
+      </button>
+        `;
+  }
+});
+
+//getting id of seat
+
+seatDetail.addEventListener('click', (e)=>{
+    if(!e.target.classList.contains('seatBtn')) return
+
+    console.log(e.target.dataset.seat)
 })
