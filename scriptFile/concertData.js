@@ -12,7 +12,7 @@ const events = [
     venue: "Tundikhel Ground",
     city: "Kathmandu",
     duration: "4 hours",
-    ticket:[]
+    price:1000
   },
 
   {
@@ -28,7 +28,7 @@ const events = [
     venue: "Shishir Niwas",
     city: "Bajura",
     duration: "3 hours",
-    ticket:[]
+    price:2000
   },
 
 ];
