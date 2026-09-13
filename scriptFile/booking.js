@@ -5,11 +5,12 @@ const eventInfo = document.querySelector(".eventInfo");
 const seatInfo = document.querySelector(".seatInfo");
 const calculation = document.querySelector(".calculation");
 const bookingAction = document.querySelector(".bookingAction");
+const alertMsg = document.querySelector(".alertMsg");
 
 //state management
 
 let selectedSeat = [];
-let totalPrice = 0
+let totalPrice = 0;
 
 //get id from url
 const params = new URLSearchParams(window.location.search);
@@ -62,6 +63,7 @@ seatInfo.addEventListener("click", (e) => {
     e.target.classList.remove("bg-green-500", "text-white");
   } else {
     selectedSeat.push(seatNo);
+    alertMsg.innerHTML = "";
     e.target.classList.add("bg-green-500", "text-white");
   }
   totalPrice = selectedSeat.length * event.price;
@@ -69,9 +71,19 @@ seatInfo.addEventListener("click", (e) => {
     <p class="font-semibold">Selected seat: ${selectedSeat}</p>
     <p class="font-semibold">Total Price: ${totalPrice}</p>
     `;
-  
 });
 
-bookingAction.innerHTML =`
-<button class="checkoutBtn bg-green-500 text-white px-3 py-1 rounded-md cursor-pointer text-2xl">Checkout</button>
-`
+bookingAction.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("checkoutBtn")) return;
+
+  if (selectedSeat.length >= 1) {
+    localStorage.setItem("selectedSeat", JSON.stringify(selectedSeat));
+    localStorage.setItem("totalPrice", totalPrice);
+
+
+    
+    window.location.href = `checkout.html?id=${event.id}`;
+  } else {
+    alertMsg.innerHTML = `Please select atleast one seat`;
+  }
+});
