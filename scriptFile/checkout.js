@@ -1,7 +1,7 @@
 import events from './concertData.js'
 
 //DOMS selector
-const cart = document.querySelector('.wrapper')
+const cart = document.querySelector('.cardSection')
 const message = document.querySelector(".message")
 
 const params = new URLSearchParams(window.location.search)
@@ -16,9 +16,8 @@ const totalPrice = localStorage.getItem("totalPrice")
 
 
 cart.innerHTML = `
-
-<div class="max-w-md mx-auto bg-white border border-gray-200 rounded-2xl shadow-md p-6">
-
+<div class=" max-w-md mx-auto bg-white border border-gray-200 rounded-2xl shadow-md p-6">
+            <div class="message"></div>
             <!-- Header -->
             <div class="mb-6">
                 <p class="text-sm text-gray-500">Booking Summary</p>
@@ -107,6 +106,16 @@ cart.innerHTML = `
 cart.addEventListener('click',(e)=>{
     if(!e.target.classList.contains('payNow')) return
     
-    alert("success")
+    
+
+    setTimeout(() => {
+        message.textContent = `Payment Successful!`
+    }, 500);
+
+    setTimeout(() => {
+        window.location.href = 'index.html'
+    }, 3000);
+
+    
 })
 
