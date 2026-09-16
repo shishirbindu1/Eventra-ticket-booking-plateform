@@ -107,7 +107,6 @@ cart.addEventListener('click',(e)=>{
     if(!e.target.classList.contains('payNow')) return
     
     
-
     setTimeout(() => {
         message.textContent = `Payment Successful!`
     }, 500);
