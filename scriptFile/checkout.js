@@ -1,19 +1,16 @@
-import events from './concertData.js'
+import events from "./concertData.js";
 
 //DOMS selector
-const cart = document.querySelector('.cardSection')
-const message = document.querySelector(".message")
+const cart = document.querySelector(".cardSection");
+const message = document.querySelector(".message");
 
-const params = new URLSearchParams(window.location.search)
-const eventId = params.get("id")
+const params = new URLSearchParams(window.location.search);
+const eventId = params.get("id");
 
 const event = events.find((event) => event.id === Number(eventId));
 
-const selectedSeat = JSON.parse(
-    localStorage.getItem("selectedSeat")
-)
-const totalPrice = localStorage.getItem("totalPrice")
-
+const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+const totalPrice = localStorage.getItem("totalPrice");
 
 cart.innerHTML = `
 <div class=" max-w-md mx-auto bg-white border border-gray-200 rounded-2xl shadow-md p-6">
@@ -101,20 +98,23 @@ cart.innerHTML = `
             </button>
 
         </div>
-`
+`;
+let soldSeats = JSON.parse(localStorage.getItem("soldSeats")) || {};
+cart.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("payNow")) return;
 
-cart.addEventListener('click',(e)=>{
-    if(!e.target.classList.contains('payNow')) return
-    
-    
-    setTimeout(() => {
-        message.textContent = `Payment Successful!`
-    }, 500);
+  if (!soldSeats[eventId]) {
+    soldSeats[eventId] = [];
+  }
 
-    setTimeout(() => {
-        window.location.href = 'index.html'
-    }, 3000);
+  soldSeats[eventId].push(...selectedSeat);
 
-    
-})
+  localStorage.setItem("soldSeats", JSON.stringify(soldSeats));
+  setTimeout(() => {
+    message.textContent = `Payment Successful!`;
+  }, 500);
 
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 3000);
+});
